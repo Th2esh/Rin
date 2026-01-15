@@ -111,6 +111,7 @@ S3_SECRET_ACCESS_KEY=<你的S3SecretAccessKey>
 
 > [!IMPORTANT]
 > 最后两行环境变量 `SKIP_DEPENDENCY_INSTALL` 和 `UNSTABLE_PRE_BUILD` 为配置 Cloudflare 使用 Bun 进行构建的参数，不要修改
+Bun 的版本要低于 1.3.0，可以是 1.2.13 或 1.2.15
 
 ```ini
 NAME=Xeu # 昵称，显示在左上角
@@ -119,7 +120,7 @@ AVATAR=https://avatars.githubusercontent.com/u/36541432 # 头像地址，显示�
 API_URL=https://rin.xeu.life # 服务端域名，可以先使用默认值查看效果，后续部署服务端后再修改
 PAGE_SIZE=5 # 默认分页大小，推荐 5
 SKIP_DEPENDENCY_INSTALL=true
-UNSTABLE_PRE_BUILD=asdf install bun latest && asdf global bun latest && bun i
+UNSTABLE_PRE_BUILD=asdf install bun 1.2.13 && asdf global bun 1.2.13 && bun i
 ```
 
 ![1000000660](https://github.com/openRin/Rin/assets/36541432/0fe9276f-e16f-4b8a-87c5-14de582c9a3a)
@@ -258,6 +259,8 @@ S3_ENDPOINT=https://8879900e5e1219fb745c9f69b086565a.r2.cloudflarestorage.com
 ```ini
 S3_ACCESS_HOST=https://image.xeu.life
 ```
+
+> 这里记得启用 **公共开发 URL**，否则前端会提示CORS跨域、后端1101等问题。[参考](https://developers.cloudflare.com/r2/buckets/public-buckets/#managed-public-buckets-through-r2dev)
 
 然后创建一个 API 令牌用于访问存储桶，可参考 https://developers.cloudflare.com/r2/api/s3/tokens/ ，这里不再赘述，拿到 ID 和 TOKEN 对应于`S3_ACCESS_KEY_ID` 和 `S3_SECRET_ACCESS_KEY` 变量，填入 Workers 的环境变量中
 
